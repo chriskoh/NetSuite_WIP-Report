@@ -38,7 +38,7 @@ function function2(){
 	var uniqList = getUniq(/*Project search results array*/);
 	
 	// create "hashmap" for each project, in the form of an array used to create windows
-    var w = window;
+    	var w = window;
 	for(var x = 0; x < uniqList.length; x++){
 		
 		w[uniqList[x]] = {
@@ -80,7 +80,7 @@ function function2(){
     		'<body>' +
     			'<table id = "myTable">' +
 			    	'<tr id="myTRTitle">' +
-			        	'<td id="myTDTitleDatac">Internal ID</td>' +
+			            '<td id="myTDTitleDatac">Internal ID</td>' +
 			            '<td id="myTDTitleData">PROJ ID</td>' +
 			            '<td id="myTDTitleData">PROJ Status @ time of report</td>' +
 			            '<td id="myTDTitleData">PROJ Name</td>' +
