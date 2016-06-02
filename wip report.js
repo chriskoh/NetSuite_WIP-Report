@@ -38,32 +38,32 @@ function function2(){
 	var uniqList = getUniq(/*Project search results array*/);
 	
 	// create "hashmap" for each project, in the form of an array used to create windows
-    	var w = window;
+    var w = window;
 	for(var x = 0; x < uniqList.length; x++){
 		
 		w[uniqList[x]] = {
-				internalID:__,
-				projectID:__,
-				projStatus:__,
-				projName:__,
-				compName:__,
-				projType:__,
-				custID:__,
-				projSalesRep:__,
-				projManager:__,
-				projStart:__,
-				projCreated:__,
-				revAdjust:__,
-				custAdjust:__,
-				estimatedRev:__,
-				estimatedCost:__,
-				actualBilling:__,
-				actualCost:__,
-				actualEnd:__,
-				subsidiary:__,
-				loggedHours:__,
-				trainingHours:__,
-				notes:__,
+				internalID:Number(0),
+				projectID:'',
+				projStatus:'',
+				projName:'',
+				compName:'',
+				projType:'',
+				custID:'',
+				projSalesRep:'',
+				projManager:'',
+				projStart:'',
+				projCreated:'',
+				revAdjust:Number(0),
+				custAdjust:Number(0),
+				estimatedRev:Number(0),
+				estimatedCost:Number(0),
+				actualBilling:Number(0),
+				actualCost:Number(0),
+				actualEnd:'',
+				subsidiary:'',
+				loggedHours:Number(0),
+				trainingHours:Number(0),
+				notes:'',
 		}
 	}
 	
@@ -80,7 +80,7 @@ function function2(){
     		'<body>' +
     			'<table id = "myTable">' +
 			    	'<tr id="myTRTitle">' +
-			            '<td id="myTDTitleDatac">Internal ID</td>' +
+			        	'<td id="myTDTitleData">Internal ID</td>' +
 			            '<td id="myTDTitleData">PROJ ID</td>' +
 			            '<td id="myTDTitleData">PROJ Status @ time of report</td>' +
 			            '<td id="myTDTitleData">PROJ Name</td>' +
@@ -141,6 +141,7 @@ function function2(){
     		var billingExcess = net;  	
     	}
 
+    	printRow(x, w[uniqList[x]], origEstGP, actualGP, estGP, pctComplete, earnedRev, actualGPtoDate, pctGP, net, backlog, excess, billingExcess);
     }
     
     html += 	'</table>' +
@@ -154,6 +155,62 @@ function function2(){
 	myInlineHtml.setDefaultValue(html);
 	
 	response.writePage(form);
+}
+
+/*-------------------------------------------------------------------------------------------------
+Function: printRow()
+Purpose:  print html row
+-------------------------------------------------------------------------------------------------*/
+function printRow(x, window, origEstGP, actualGP, estGP, pctComplete, earnedRev, actualGPtoDate, pctGP, net, backlog, excess, billingExcess){
+	
+	if(x % 2 == 0){
+		
+		var color = "White";
+	}else{
+		
+		var color = "Blue";
+	}
+	
+	var tr = 'myTR' + color;
+	var td = 'myTD' + color + 'Data';
+	
+	html += '<tr id=' + tr + '>' +
+				'<td id=' + td + '>' + window.internalID + '</td>' +
+			    '<td id=' + td + '>' + window.projectID + '</td>' +
+			    '<td id=' + td + '>' + window.projStatus + '</td>' +
+			    '<td id=' + td + '>' + window.projName + '</td>' +
+			    '<td id=' + td + '>' + window.compName + '</td>' +
+			    '<td id=' + td + '>' + window.projType + '</td>' +
+			    '<td id=' + td + '>' + window.custID + '</td>' +
+			    '<td id=' + td + '>' + window.projSalesRep + '</td>' +
+			    '<td id=' + td + '>' + window.projManager + '</td>' +
+			    '<td id=' + td + '>' + window.projStart + '</td>' +
+			    '<td id=' + td + '>' + window.projCreated + '</td>' +
+			    '<td id=' + td + '>' + window.revAdjust + '</td>' +
+			    '<td id=' + td + '>' + window.custAdjust + '</td>' +
+			    '<td id=' + td + '>' + window.estimatedRev + '</td>' +
+			    '<td id=' + td + '>' + window.estimatedCost + '</td>' +
+			    '<td id=' + td + '>' + origEstGP + '</td>' +
+			    '<td id=' + td + '>' + window.actualBilling + '</td>' +
+			    '<td id=' + td + '>' + window.actualCost + '</td>' +
+			    '<td id=' + td + '>' + actualGP + '</td>' +
+			    '<td id=' + td + '>' + estGP + '</td>' +
+			    '<td id=' + td + '>' + pctComplete + '</td>' +
+			    '<td id=' + td + '>' + earnedRev + '</td>' +
+			    '<td id=' + td + '>' + actualGPtoDate + '</td>' +
+			    '<td id=' + td + '>' + pctGP + '</td>' +
+			    '<td id=' + td + '>' + net + '</td>' +
+			    '<td id=' + td + '>' + excess + '</td>' +
+			    '<td id=' + td + '>' + billingExcess + '</td>' +
+			    '<td id=' + td + '>' + backlog + '</td>' +
+			    '<td id=' + td + '>' + window.internalID + '</td>' + // Cost Activity after Month End?
+			    '<td id=' + td + '>' + window.internalID + '</td>' + // Class
+			    '<td id=' + td + '>' + window.actualEnd + '</td>' +
+			    '<td id=' + td + '>' + window.subsidiary + '</td>' +
+			    '<td id=' + td + '>' + window.loggedHours + '</td>' +
+			    '<td id=' + td + '>' + window.trainingHours + '</td>' +
+			    '<td id=' + td + '>' + window.notes + '</td>' +
+			'</tr>';
 }
 
 /*-------------------------------------------------------------------------------------------------
